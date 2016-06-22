@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="XiaRing" >
+        <attr name="ringInvalidColor" format="color" />
+        <attr name="ringValidColor" format="color" />
+        <attr name="ringWidth" format="dimension" />
+        <attr name="titleColor" format="color" />
+        <attr name="titleSize" format="dimension" />
+    </declare-styleable>
+</resources>
