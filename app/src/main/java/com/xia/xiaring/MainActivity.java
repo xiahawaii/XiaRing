@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int value = 60;
+                int value = 100;
                 if (!TextUtils.isEmpty(mEditText.getText())) {
                     value = Integer.valueOf(mEditText.getText().toString());
                 }
