@@ -34,9 +34,9 @@ public class XiaRing extends View {
 
     private Paint mPaint;                   // 画笔对象；
     private boolean isProgress;             // 动画情况；true = 正在执行动画，false = 不在执行动画；
-    private float targetProgress = 0;       // 目标的百分比，范围：0 ~ 360；
-    private float currentProgress = 0;      // 当前的百分比，范围：0 ~ 360；
-    private float stepProgress = 3;         // 百分比改变的步长；步长是逐渐加大；
+    private double targetProgress = 0;      // 目标的百分比，范围：0 ~ 360；
+    private double currentProgress = 0;     // 当前的百分比，范围：0 ~ 360；
+    private double stepProgress = 3;        // 百分比改变的步长；步长是逐渐加大；
 
     public XiaRing(Context context) {
         this(context, null);
@@ -187,11 +187,11 @@ public class XiaRing extends View {
                 centreY - radius + mRingWidth,
                 centreX + radius - mRingWidth,
                 centreY + radius - mRingWidth);
-        canvas.drawArc(oval, -90, currentProgress, false, mPaint);
+        canvas.drawArc(oval, -90, (float) currentProgress, false, mPaint);
 
         // 画文字信息
         mPaint.setColor(mTitleColor);
-        mPaint.setStrokeWidth(4);
+        mPaint.setStrokeWidth(3);
         mPaint.setTextSize(mTitleSize);
         Rect mBound = new Rect();
         String mTitleText = ((int)(currentProgress / 3.6)) + "%";
@@ -199,8 +199,36 @@ public class XiaRing extends View {
         canvas.drawText(mTitleText, centreX - mBound.width() / 2, centreY + mBound.height() / 2, mPaint);
     }
 
-    // 重新开始
-    public void resetProgress(int fromProgress, int toProgress) {
+    /**
+     * 设定动画结束显示的百分比数据，有当期位置移动至目标百分比。
+     * @param toProgress - 动画结束的百分比
+     */
+    public void moveProgress(int toProgress) {
+        this.showProgress((int)currentProgress, toProgress);
+    }
+
+    /**
+     * 将当前进度添加至某个百分比
+     * @param addProgress - 添加的百分比
+     */
+    public void addProgress(int addProgress) {
+        this.showProgress((int)currentProgress, (int)(targetProgress / 3.6) + addProgress);
+    }
+
+    /**
+     * 设定动画结束显示的百分比数据，并重置动画，由零开始显示
+     * @param toProgress - 动画结束的百分比
+     */
+    public void resetProgress(int toProgress) {
+        this.showProgress(-1, toProgress);
+    }
+
+    /**
+     * 设定动画开始的百分比数据，动画结束显示的百分比数据，并执行动画
+     * @param fromProgress - 动画开始的百分比
+     * @param toProgress - 动画结束的百分比
+     */
+    private void showProgress(int fromProgress, int toProgress) {
 
         if (toProgress > 100)
             toProgress = 100;
@@ -208,7 +236,7 @@ public class XiaRing extends View {
             toProgress = 0;
 
         this.currentProgress = fromProgress;
-        this.targetProgress = (int) (toProgress * 3.6);
+        this.targetProgress = toProgress * 3.6;
         this.stepProgress = 3;
         startUpdateThread();
     }

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="com.xia.xiaring.MainActivity">
 
     <com.xia.xiaring.view.custom.XiaRing
         android:id="@+id/xiaring"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:ringInvalidColor="#c8c8c8"
         app:ringValidColor="#5dac88"
@@ -19,27 +20,60 @@
         app:titleColor="#5dac88"
         app:titleSize="18sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+    <EditText
+        android:id="@+id/size_input"
+        android:layout_width="190dp"
+        android:layout_height="48dp"
+        android:layout_alignTop="@id/xiaring"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/xiaring"
+        android:layout_toRightOf="@id/xiaring"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:hint="Size"
+        android:inputType="number" />
 
-        <EditText
-            android:id="@+id/value"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:hint="有效：0 ~ 100"
-            android:inputType="number" />
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/size_input"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/xiaring"
+        android:layout_toRightOf="@id/xiaring"
+        android:text="Reset" />
 
-        <Button
-            android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="reset" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/move"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:layout_alignTop="@id/reset"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/reset"
+        android:layout_toRightOf="@id/reset"
+        android:text="Move" />
 
+    <Button
+        android:id="@+id/add"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/reset"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/xiaring"
+        android:layout_toRightOf="@id/xiaring"
+        android:text="Add" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/reduce"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/reset"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/add"
+        android:layout_toRightOf="@id/add"
+        android:text="Reduce" />
+</RelativeLayout>
